@@ -1,13 +1,13 @@
-import Slide from "@/components/slide";
+import Slide, { helperClassName } from "@/components/slide";
 
 const ActionItems2 = () => (
-	<Slide className="ops-needs bg-img-var flex flex-col items-center justify-center px-4 gap-8"
+	<Slide className={`${helperClassName}`}
 			style={{
 				'--bg-img': "url('/backgrounds/wheel-guy.svg')",
 			}}>
 		<h1>Managing Action Items</h1>
 
-		<ul className="max-w-[80%]">
+		<ul className="max-w-[80%] flex flex-col gap-4">
 			<li>
 				Create tasks, assign one or more people, & set due dates.
 				Never lose track of your todos.

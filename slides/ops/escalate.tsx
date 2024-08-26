@@ -1,13 +1,13 @@
-import Slide from "@/components/slide";
+import Slide, { helperClassName } from "@/components/slide";
 
 const Escalation = () => (
-	<Slide className="ops-needs bg-img-var flex flex-col items-center justify-center px-4 gap-8"
+	<Slide className={`${helperClassName}`}
 			style={{
 				'--bg-img': "url('/backgrounds/wheel-guy.svg')",
 			}}>
 		<h1>Seamlessly Escalate Urgent Blockers</h1>
 
-		<ul className="max-w-[80%]">
+		<ul className="max-w-[80%] flex flex-col gap-4">
 			<li>
 				10x effieciency by cutting out miscommunications.
 			</li>

@@ -1,2 +1,17 @@
 .ops-needs {
 }
+
+.flex-center-scrollable {
+	display: flex;
+	justify-content: space-between;
+	overflow: auto;
+
+	// > * {
+	// 	grow
+	// }
+
+	&::before, &::after {
+		content: ' ';
+		flex-grow: 1;
+	}
+}

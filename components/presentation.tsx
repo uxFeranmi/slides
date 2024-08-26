@@ -57,17 +57,19 @@ class Presentation extends React.Component<TProps, TState> {
 		const Slide = slides?.[slideIndex] || (() => <>{children}</>);
 
 		return (
-			<RootTag className="flex items-center justify-center w-full h-full px-[5vw] py-[5vh] py-[5svh] text-pink-400">
+			<RootTag className="flex items-center justify-center w-[100vw] h-[100vh] px-[5vw] py-[5vh] py-[5svh] text-pink-400">
 				<aside>
 					{/* Minimap sidebar. (Or top bar in portrait) */}
 				</aside>
 
 				<Slide />
 
-				<button onClick={this.previous}>
-					Previous
+				<button className="bg-slate-500 text-gray-100 rounded-lg py-3 px-5 absolute landscape:left-5 portrait:top-5"
+						onClick={this.previous}>
+					Prev
 				</button>
-				<button onClick={this.next}>
+				<button className="bg-slate-500 text-gray-200 rounded-lg py-3 px-5 absolute landscape:right-5 portrait:bottom-5"
+						onClick={this.next}>
 					Next
 				</button>
 				{/* Next and Previous buttons */}

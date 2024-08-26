@@ -1,7 +1,7 @@
-import Slide from "@/components/slide";
+import Slide, { helperClassName } from "@/components/slide";
 
 const OpsNeeds = () => (
-	<Slide className="ops-needs bg-img-var flex flex-col items-center justify-center"
+	<Slide className={`${helperClassName}`}
 			style={{
 				'--bg-img': "url('/backgrounds/wheel-guy.svg')",
 			}}>
@@ -19,11 +19,6 @@ const OpsNeeds = () => (
 				Escalating seamlessly.
 			</li>
 		</ul>
-
-		{/* <h2>Potentially Useful</h2>
-		<ul>
-			<li>Importing Emails</li>
-		</ul> */}
 	</Slide>
 );
 

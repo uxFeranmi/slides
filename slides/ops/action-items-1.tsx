@@ -1,7 +1,7 @@
-import Slide from "@/components/slide";
+import Slide, { helperClassName } from "@/components/slide";
 
 const ActionItems1 = () => (
-	<Slide className="ops-needs bg-img-var flex flex-col items-center justify-center px-4 gap-8"
+	<Slide className={`${helperClassName}`}
 			style={{
 				'--bg-img': "url('/backgrounds/wheel-guy.svg')",
 			}}>
