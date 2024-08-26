@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	distDir: 'build',
+	distDir: 'docs',
 	pageExtensions: ['page.tsx', 'm.ts'],
 	output: 'export',
+	basePath: '/slides/docs',
 };
 
 export default nextConfig;
