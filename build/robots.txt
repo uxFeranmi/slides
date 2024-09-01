@@ -1,3 +1,0 @@
-# Disallow all user agents.
-User-agent: *
-Disallow: /

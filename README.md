@@ -1,2 +1,2 @@
 # slides
- Create rich slides, and give interactive presentations remotely.
+Create rich slides, and give interactive presentations remotely.
