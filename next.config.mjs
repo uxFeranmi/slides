@@ -3,7 +3,8 @@ const nextConfig = {
 	// swcMinify: false,
 	// distDir: 'docs',
 	pageExtensions: ['page.tsx', 'm.ts'],
-	// output: 'export',
+	output: 'export',
+	// outDir: 'build',
 	// basePath: '/slides',
 };
 

@@ -1,6 +1,6 @@
 import type { JSXElementConstructor } from 'react';
 
-import '@/styles/tailwind.css';
+import '@/styles/globals.css';
 import '@/styles/index.scss';
 
 import { useMemo } from 'react';
