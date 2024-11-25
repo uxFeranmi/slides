@@ -5,6 +5,7 @@ import '@/styles/index.scss';
 
 import { useMemo } from 'react';
 import Head from 'next/head';
+import { useInstance } from '@cleanweb/react';
 
 
 interface AppComponentProps {
@@ -23,6 +24,8 @@ type AppProps = {
 
 const App = (props: AppProps) => {
 	const { pageProps: appComponentProps } = props;
+
+	useInstance()
 
 	const pageComponentProps = (() => {
 		const dependencies = {};

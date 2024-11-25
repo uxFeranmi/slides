@@ -1,3 +1,4 @@
+import { ClassComponent } from "@cleanweb/react";
 import type { JSXElementConstructor, ReactNode } from "react";
 import React from "react";
 
@@ -13,14 +14,10 @@ type TState = {
 	slideIndex: number,
 };
 
-class Presentation extends React.Component<TProps, TState> {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			slideIndex: 0,
-		};
-	}
+class Presentation extends ClassComponent<TProps, TState> {
+	static getInitialState = (props) => ({
+		slideIndex: 0,
+	});
 
 	next = () => {
 		const { slides } = this.props;
@@ -29,7 +26,7 @@ class Presentation extends React.Component<TProps, TState> {
 			const newSlideIndex = this.state.slideIndex === slides.length - 1
 				? 0 : this.state.slideIndex + 1;
 
-			this.setState({ slideIndex: newSlideIndex });
+			this.state.slideIndex = newSlideIndex;
 		}
 
 		this.props.next?.();
@@ -44,17 +41,17 @@ class Presentation extends React.Component<TProps, TState> {
 				? slides.length - 1
 				: this.state.slideIndex - 1;
 
-			this.setState({ slideIndex: newSlideIndex });
+			this.state.putMany({ slideIndex: newSlideIndex });
 		}
 
 		this.props.previous?.();
 	};
 
-	render(): ReactNode {
+	Render = () => {
 		const { children = null, slides, RootTag = 'main' } = this.props;
 		const { slideIndex } = this.state;
 
-		const Slide = slides?.[slideIndex] || (() => <>{children}</>);
+		const Slide = slides?.[slideIndex] ?? (() => <>{children}</>);
 
 		return (
 			<RootTag className="flex items-center justify-center w-[100vw] h-[100vh] px-[5vw] py-[5vh] py-[5svh] text-pink-400">
@@ -78,4 +75,4 @@ class Presentation extends React.Component<TProps, TState> {
 	}
 }
 
-export default Presentation;
+export default Presentation.FC();
