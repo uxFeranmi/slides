@@ -1,14 +1,14 @@
-import type { JSXElementConstructor } from 'react';
+// 'use client';
+import { useMemo, type JSXElementConstructor, type VoidFunctionComponent } from 'react';
 
 import '@/styles/tailwind.css';
 import '@/styles/index.scss';
 
-import { useMemo } from 'react';
 import Head from 'next/head';
-import { useInstance } from '@cleanweb/react';
+import { ClassComponent, noOp } from '@cleanweb/react';
 
 
-interface AppComponentProps {
+export interface AppComponentProps {
 	toPage: any,
 };
 
@@ -22,39 +22,41 @@ type AppProps = {
 	Component: JSXElementConstructor<PageComponentProps & AppComponentProps['toPage']>,
 }
 
-const App = (props: AppProps) => {
-	const { pageProps: appComponentProps } = props;
+interface NextJsPage extends VoidFunctionComponent<AppProps> {
+	getInitialProps?: (params: any) => object;
+}
 
-	useInstance()
+class AppComponent extends ClassComponent<AppProps, {count: number}> {
+	static getInitialState = () => ({ count: 0 });
 
-	const pageComponentProps = (() => {
-		const dependencies = {};
+	onMount = () => {
+		setTimeout(() => {
+			this.state.count++;
+		}, 2000);
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks, react-hooks/exhaustive-deps
-		return useMemo(() => dependencies, Object.values(dependencies));
-	})();
+		return noOp;
+	};
 
-	const pageComponentNode = useMemo(() => {
-		return <props.Component {...pageComponentProps} {...appComponentProps?.toPage} />;
+	PageComponentNode = () => {
+		return <this.props.Component {...this.props.pageProps?.toPage} />;
+	};
 
-		// Eslint fails to recognise "props.Component" as the more appropriate dependency even though it's more specific. It expects "props", a limitation in the rule's implementation.
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.Component, pageComponentProps, appComponentProps?.toPage]);
-
-	return <>
+	template = () => <>
 		<Head>
 			<link rel="icon" href="/favicon.svg" />
 			<meta name="theme-color" content="#F06900" />
 		</Head>
 
-		{pageComponentNode}
+		<h1>COUNT: {this.state.count}</h1>
+		<this.PageComponentNode />
 	</>;
-};
+}
+
+const App: NextJsPage = AppComponent.FC();
 
 App.getInitialProps = async (context: any) => {
 	const { res, err: error, asPath, pathname } = context;
 	const statusCode = res?.statusCode || error?.statusCode || error?.status || 500;
-
 
 	return {};
 };
