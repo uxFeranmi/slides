@@ -18,6 +18,9 @@
     "noErrorTruncation": true,
     "jsx": "preserve",
     "exactOptionalPropertyTypes": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "incremental": true,
     "plugins": [
       {
@@ -33,9 +36,11 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next/types/**/*.ts"
   ]
 }
