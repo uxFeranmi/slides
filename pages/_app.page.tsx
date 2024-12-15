@@ -1,12 +1,15 @@
 // 'use client';
-import { useMemo, type JSXElementConstructor, type VoidFunctionComponent } from 'react';
+import type { JSXElementConstructor, VoidFunctionComponent } from 'react';
+import type { IComponentClass, THooksBase } from '@cleanweb/react';
+import type { TStateData } from '@cleanweb/react/state';
 
 import '@/styles/tailwind.css';
 import '@/styles/index.scss';
 
+import { useMemo } from 'react';
 import Head from 'next/head';
-import { ClassComponent, IComponentClass, noOp, THooksBase } from '@cleanweb/react';
-import { TStateData } from '@cleanweb/react/state';
+
+import { ClassComponent, noOp } from '@cleanweb/react';
 
 
 export interface AppComponentProps {
