@@ -1,6 +1,7 @@
 // 'use client';
 import type { JSXElementConstructor, VoidFunctionComponent } from 'react';
-import type { IComponentClass, THooksBase } from '@cleanweb/react';
+import type { THooksBase } from '@cleanweb/react';
+import type { IClassComponent } from '@cleanweb/react/class/types/class/instance';
 import type { TStateData } from '@cleanweb/react/state';
 
 import '@/styles/tailwind.css';
@@ -30,11 +31,11 @@ interface NextJsPage extends VoidFunctionComponent<AppProps> {
 	getInitialProps?: (params: any) => object;
 }
 
-class AppBaseClass extends ClassComponent<AppProps, {count: number}, object> {};
-interface IAppBaseClass extends ComponentClassIT<AppBaseClass> {}
+class AppCC extends ClassComponent<AppProps, {count: number}, {a: string}> {};
+interface IAppCC extends IClassComponent<AppCC> {}
 
-class App extends AppBaseClass implements IAppBaseClass {
-	static getInitialState = () => ({ count: 0 });
+class App extends AppCC implements IClassComponent<App> {
+	// static getInitialState = () => ({ count: 0 });
 
 	onMount = () => {
 		setTimeout(() => {
@@ -49,6 +50,10 @@ class App extends AppBaseClass implements IAppBaseClass {
 		return <Component {...pageProps?.toPage} />;
 	};
 
+	useHooks = () => {
+		return {a: ''}
+	};
+
 	template = () => <>
 		<Head>
 			<link rel="icon" href="/favicon.svg" />
@@ -59,50 +64,16 @@ class App extends AppBaseClass implements IAppBaseClass {
 		<this.PageComponent />
 	</>;
 
-	static UI = this.FC();
-	static RC: NextJsPage = App.FC();
-	static readonly Component = this.RC;
+	static readonly RC: NextJsPage = this.FC();
 }
 
 
-App.Component.getInitialProps = async (context: any) => {
+App.RC.getInitialProps = async (context: any) => {
 	const { res, err: error, asPath, pathname } = context;
 	const statusCode = res?.statusCode || error?.statusCode || error?.status || 500;
 
 	return {};
 };
 
-export default App.Component;
-
-
-
-
-
-type ComponentClassIT<
-		TComponent extends ClassComponent<object, object, THooksBase>> = {
-	useHooks$?: () => TComponent['hooks'];
-	template?: () => React.JSX.Element | null;
-} & TComponent;
-
-type T<
-	TProps extends object,
-	TState extends TStateData,
-	THooks extends THooksBase
-> = typeof ClassComponent<TProps, TState, THooks>;
-
-interface ComponentClass<
-		TProps extends object,
-		TState extends TStateData,
-		THooks extends THooksBase> extends T<TProps, TState, THooks> {
-	new (
-		...params: ConstructorParameters<T<TProps, TState, THooks>>
-	): ComponentClassIT<ClassComponent<TProps, TState, THooks>>;
-}
-
-type Extractor = <
-		TComponent extends ComponentClass<object, object, THooksBase>>(
-	this: NonNullable<typeof _Component>,
-	_Component?: TComponent & IComponentClass<InstanceType<TComponent>>
-) => VoidFunctionComponent<InstanceType<TComponent>['props']>;
-
+export default App.RC;
 
