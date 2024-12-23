@@ -31,11 +31,12 @@ interface NextJsPage extends VoidFunctionComponent<AppProps> {
 	getInitialProps?: (params: any) => object;
 }
 
-class AppCC extends ClassComponent<AppProps, {count: number}, {a: string}> {};
+class AppCC extends ClassComponent<AppProps, {count: number}, {a: string}> {}; // 
+// AppCC.extract();
 interface IAppCC extends IClassComponent<AppCC> {}
 
 class App extends AppCC implements IClassComponent<App> {
-	// static getInitialState = () => ({ count: 0 });
+	static getInitialState = () => ({ count: 0 });
 
 	onMount = () => {
 		setTimeout(() => {
@@ -51,7 +52,7 @@ class App extends AppCC implements IClassComponent<App> {
 	};
 
 	useHooks = () => {
-		return {a: ''}
+		return {a: ''};
 	};
 
 	template = () => <>
@@ -66,6 +67,8 @@ class App extends AppCC implements IClassComponent<App> {
 
 	static readonly RC: NextJsPage = this.FC();
 }
+
+App.getInitialState
 
 
 App.RC.getInitialProps = async (context: any) => {
