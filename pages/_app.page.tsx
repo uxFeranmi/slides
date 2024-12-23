@@ -36,14 +36,16 @@ class AppCC extends ClassComponent<AppProps, {count: number}, {a: string}> {}; /
 interface IAppCC extends IClassComponent<AppCC> {}
 
 class App extends AppCC implements IClassComponent<App> {
+	static readonly RC: NextJsPage = this.extract();
+
 	static getInitialState = () => ({ count: 0 });
 
 	onMount = () => {
-		setTimeout(() => {
+		const interval = setInterval(() => {
 			this.state.count++;
 		}, 2000);
 
-		return noOp;
+		return () => clearInterval(interval);
 	};
 
 	PageComponent = () => {
@@ -64,12 +66,7 @@ class App extends AppCC implements IClassComponent<App> {
 		<h1>COUNT: {this.state.count}</h1>
 		<this.PageComponent />
 	</>;
-
-	static readonly RC: NextJsPage = this.FC();
 }
-
-App.getInitialState
-
 
 App.RC.getInitialProps = async (context: any) => {
 	const { res, err: error, asPath, pathname } = context;
